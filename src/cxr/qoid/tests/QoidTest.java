@@ -51,8 +51,24 @@ public class QoidTest {
 		System.out.println(r.toString());
 	}
 	
+	public static void parse_test() {
+
+		Qoid q = new Qoid("test");
+		q.add(new Property("tag", "with val"));
+		q.add(new Property("tag without val"));
+		
+		Bill b = new Bill("Bill Test");
+		
+		b.add(q);
+		b.add(q);
+		
+		Bill b2 = Bill.parse("Bill Parse Test", b.toString());
+		
+		System.out.println(b2.toString());
+	}
+	
 	public static void main(String[] args) {
-		example_register();
+		parse_test();
 	}
 	
 }
