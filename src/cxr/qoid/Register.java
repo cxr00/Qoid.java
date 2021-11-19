@@ -28,18 +28,18 @@ public class Register extends Index<Index<?>>{
 
 		File directory = new File(filepath);
 		
-		String tag = directory.getName();
-		tag = tag.substring(0, tag.length());
-		
-		Register output = new Register(tag);
-		
-		
 		if (directory.isFile()){
 			throw new IOException("Invalid filepath: " + filepath + " is not a directory");
 		}
 		if (!filepath.endsWith(".cxr")) {
 			throw new IOException("Invalid file type: " + filepath + " does not end with .cxr");
 		}
+		
+		String tag = directory.getName();
+		tag = tag.substring(0, tag.length() - 4);
+		
+		Register output = new Register(tag);
+		
 		
 		String[] contents = directory.list();
 		
