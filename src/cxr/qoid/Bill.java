@@ -20,6 +20,16 @@ public class Bill extends Index<Qoid>{
 		super(tag, val);
 	}
 
+	public Bill getAll(String tag) {
+		Bill output = new Bill(tag + " search results");
+		for (Qoid q : this) {
+			if (q.tag().equals(tag)) {
+				output.add(q);
+			}
+		}
+		return output;
+	}
+
 	public String toString() {
 		String output = "/ " + tag + "\n";
 		for (Qoid q : this) {

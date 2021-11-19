@@ -92,8 +92,21 @@ public class QoidTest {
 		r.save(dir + "/example2.cxr");
 	}
 	
+	public static void get_test() throws IOException {
+		String dir = System.getProperty("user.dir");
+		Register r = Register.open(dir + "/example.cxr");
+		
+		Register search0 = r.getAll("examplebill");
+		
+		System.out.println(search0.toString());
+		
+		Bill search1 = ((Bill) r.get("examplebill")).getAll("Qoid2");
+		
+		System.out.println(search1.toString());
+	}
+	
 	public static void main(String[] args) throws IOException {
-		register_open_and_save_test();
+		get_test();
 	}
 	
 }

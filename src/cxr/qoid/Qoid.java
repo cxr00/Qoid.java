@@ -22,4 +22,13 @@ public class Qoid extends Index<Property>{
 		return output;
 	}
 
+	public Qoid getAll(String tag) {
+		Qoid output = new Qoid(tag + " search results");
+		for (Property p : this) {
+			if (p.tag().equals(tag)) {
+				output.add(p);
+			}
+		}
+		return output;
+	}
 }

@@ -41,6 +41,16 @@ public class Index<V extends Qoid<?>> extends Qoid<ArrayList<V>> implements List
 	@Override public void clear() { val.clear(); }
 
 	@Override public V get(int index) { return val.get(index); }
+	
+	public V get(String tag) {
+		// Returns the first instance of an element with the given tag
+		for (V v : this) {
+			if(v.tag().equals(tag)) {
+				return v;
+			}
+		}
+		return null;
+	}
 
 	@Override public V set(int index, V element) { return val.set(index, element); }
 

@@ -24,6 +24,16 @@ public class Register extends Index<Index<?>>{
 		return output;
 	}
 
+	public Register getAll(String tag) {
+		Register output = new Register(tag + " search results");
+		for (Index<?> i : this) {
+			if (i.tag().equals(tag)) {
+				output.add(i);
+			}
+		}
+		return output;
+	}
+
 	public static Register open(String filepath) throws IOException {
 
 		File directory = new File(filepath);
