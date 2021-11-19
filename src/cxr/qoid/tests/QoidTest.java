@@ -78,13 +78,13 @@ public class QoidTest {
 	
 	public static void register_open_test() throws IOException {
 		String dir = System.getProperty("user.dir");
-		Register r = Register.open("example", dir + "/example.cxr");
+		Register r = Register.open(dir + "/example.cxr");
 		
 		System.out.println(r.toString());
 	}
 	
 	public static void main(String[] args) throws IOException {
-		bill_open_test();
+		register_open_test();
 	}
 	
 }

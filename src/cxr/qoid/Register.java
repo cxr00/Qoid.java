@@ -24,10 +24,15 @@ public class Register extends Index<Index<?>>{
 		return output;
 	}
 
-	public static Register open(String tag, String filepath) throws IOException {
+	public static Register open(String filepath) throws IOException {
+
+		File directory = new File(filepath);
+		
+		String tag = directory.getName();
+		tag = tag.substring(0, tag.length());
+		
 		Register output = new Register(tag);
 		
-		File directory = new File(filepath);
 		
 		if (directory.isFile()){
 			throw new IOException("Invalid filepath: " + filepath + " is not a directory");
@@ -40,11 +45,10 @@ public class Register extends Index<Index<?>>{
 		
 		for(String filename : contents) {
 			if (filename.endsWith(".cxr")){
-				String subtag = filename.substring(0, filename.length() - 4);
 				String subfilepath = filepath + "/" + filename;
 				File subfile = new File(subfilepath);
 				if (subfile.isDirectory()) {
-					output.add(Register.open(subtag, subfilepath));
+					output.add(Register.open(subfilepath));
 				}
 				else {
 					output.add(Bill.open(subfilepath));
