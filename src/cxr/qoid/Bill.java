@@ -1,7 +1,7 @@
 package cxr.qoid;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -93,7 +93,13 @@ public class Bill extends Index<Qoid>{
 		return output;
 	}
 	
-	public static Bill open(String tag, String filepath) throws IOException {
+	public static Bill open(String filepath) throws IOException {
+		if (!filepath.endsWith(".cxr")) {
+			throw new IOException("Invalid file type: " + filepath + " is not of type .cxr");
+		}
+		File file = new File(filepath);
+		String tag = file.getName();
+		
 		BufferedReader br = new BufferedReader(new FileReader(filepath));
 		
 		ArrayList<String> text = new ArrayList<String>();

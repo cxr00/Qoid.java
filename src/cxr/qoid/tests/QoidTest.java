@@ -71,7 +71,7 @@ public class QoidTest {
 	
 	public static void bill_open_test() throws IOException {
 		String dir = System.getProperty("user.dir");
-		Bill b = Bill.open("test", dir + "/test.cxr");
+		Bill b = Bill.open(dir + "/test.cxr");
 		
 		System.out.println(b.toString());
 	}
@@ -84,7 +84,7 @@ public class QoidTest {
 	}
 	
 	public static void main(String[] args) throws IOException {
-		register_open_test();
+		bill_open_test();
 	}
 	
 }

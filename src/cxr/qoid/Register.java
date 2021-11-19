@@ -29,8 +29,11 @@ public class Register extends Index<Index<?>>{
 		
 		File directory = new File(filepath);
 		
-		if (!directory.isDirectory()){
+		if (directory.isFile()){
 			throw new IOException("Invalid filepath: " + filepath + " is not a directory");
+		}
+		if (!filepath.endsWith(".cxr")) {
+			throw new IOException("Invalid file type: " + filepath + " does not end with .cxr");
 		}
 		
 		String[] contents = directory.list();
@@ -44,7 +47,7 @@ public class Register extends Index<Index<?>>{
 					output.add(Register.open(subtag, subfilepath));
 				}
 				else {
-					output.add(Bill.open(subtag, subfilepath));
+					output.add(Bill.open(subfilepath));
 				}
 			}
 		}
