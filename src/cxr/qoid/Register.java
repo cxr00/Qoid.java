@@ -24,6 +24,28 @@ public class Register extends Index<Index<?>>{
 		return output;
 	}
 
+	public Bill getBill(String tag) {
+		for (Index<?> i : this) {
+			if (i.tag().equals(tag)) {
+				if (i.getClass().getSimpleName().equals("Bill")) {
+					return (Bill) i;
+				}
+			}
+		}
+		return new Bill(tag + " not found");
+	}
+	
+	public Register getRegister(String tag) {
+		for (Index<?> i : this) {
+			if (i.tag().equals(tag)) {
+				if (i.getClass().getSimpleName().equals("Register")) {
+					return (Register) i;
+				}
+			}
+		}
+		return new Register(tag + " not found");
+	}
+	
 	public Register getAll(String tag) {
 		Register output = new Register(tag + " search results");
 		for (Index<?> i : this) {

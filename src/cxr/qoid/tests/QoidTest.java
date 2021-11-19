@@ -8,6 +8,8 @@ import cxr.qoid.Qoid;
 import cxr.qoid.Register;
 
 public class QoidTest {
+	
+	public static String dir = System.getProperty("user.dir");
 
 	public static void example_qoid() {
 		Qoid q = new Qoid("test");
@@ -70,21 +72,18 @@ public class QoidTest {
 	}
 	
 	public static void bill_open_test() throws IOException {
-		String dir = System.getProperty("user.dir");
 		Bill b = Bill.open(dir + "/test.cxr");
 		
 		System.out.println(b.toString());
 	}
 	
 	public static void register_open_test() throws IOException {
-		String dir = System.getProperty("user.dir");
 		Register r = Register.open(dir + "/example.cxr");
 		
 		System.out.println(r.toString());
 	}
 	
 	public static void register_open_and_save_test() throws IOException {
-		String dir = System.getProperty("user.dir");
 		Register r = Register.open(dir + "/example.cxr");
 		
 		System.out.println(r.toString());
@@ -93,7 +92,7 @@ public class QoidTest {
 	}
 	
 	public static void get_test() throws IOException {
-		String dir = System.getProperty("user.dir");
+		
 		Register r = Register.open(dir + "/example.cxr");
 		
 		Register search0 = r.getAll("examplebill");
@@ -105,8 +104,20 @@ public class QoidTest {
 		System.out.println(search1.toString());
 	}
 	
+	public static void get_exclusive_test() throws IOException {
+		Register r = Register.open(dir + "/example.cxr");
+		
+		Bill b = r.getBill("nestedregister");
+		
+		Register r2 = r.getRegister("nestedregister");
+		
+		System.out.println(b.toString());
+		
+		System.out.println(r2.toString());
+	}
+	
 	public static void main(String[] args) throws IOException {
-		get_test();
+		get_exclusive_test();
 	}
 	
 }
