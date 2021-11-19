@@ -9,8 +9,6 @@ import cxr.qoid.Register;
 
 public class QoidTest {
 	
-	public static String dir = System.getProperty("user.dir");
-
 	public static void example_qoid() {
 		Qoid q = new Qoid("test");
 		q.add(new Property("tag", "with val"));
@@ -72,28 +70,28 @@ public class QoidTest {
 	}
 	
 	public static void bill_open_test() throws IOException {
-		Bill b = Bill.open(dir + "/test.cxr");
+		Bill b = Bill.open("test.cxr");
 		
 		System.out.println(b.toString());
 	}
 	
 	public static void register_open_test() throws IOException {
-		Register r = Register.open(dir + "/example.cxr");
+		Register r = Register.open("example.cxr");
 		
 		System.out.println(r.toString());
 	}
 	
 	public static void register_open_and_save_test() throws IOException {
-		Register r = Register.open(dir + "/example.cxr");
+		Register r = Register.open("example.cxr");
 		
 		System.out.println(r.toString());
 		
-		r.save(dir + "/example2.cxr");
+		r.save("example2.cxr");
 	}
 	
 	public static void get_test() throws IOException {
 		
-		Register r = Register.open(dir + "/example.cxr");
+		Register r = Register.open("example.cxr");
 		
 		Register search0 = r.getAll("examplebill");
 		
@@ -105,7 +103,7 @@ public class QoidTest {
 	}
 	
 	public static void get_exclusive_test() throws IOException {
-		Register r = Register.open(dir + "/example.cxr");
+		Register r = Register.open("example.cxr");
 		
 		Bill b = r.getBill("nestedregister");
 		
@@ -117,7 +115,7 @@ public class QoidTest {
 	}
 	
 	public static void set_test() throws IOException {
-		Register r = Register.open(dir + "/example.cxr");
+		Register r = Register.open("example.cxr");
 		
 		r.getBill("examplebill").get("Qoid1").get("tag2").setVal("new val1");
 		
