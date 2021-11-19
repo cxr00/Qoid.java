@@ -116,8 +116,16 @@ public class QoidTest {
 		System.out.println(r2.toString());
 	}
 	
+	public static void set_test() throws IOException {
+		Register r = Register.open(dir + "/example.cxr");
+		
+		r.getBill("examplebill").get("Qoid1").get("tag2").setVal("new val1");
+		
+		System.out.println(r.toString());
+	}
+	
 	public static void main(String[] args) throws IOException {
-		get_exclusive_test();
+		set_test();
 	}
 	
 }
