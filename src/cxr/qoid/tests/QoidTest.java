@@ -1,5 +1,7 @@
 package cxr.qoid.tests;
 
+import java.io.IOException;
+
 import cxr.qoid.Bill;
 import cxr.qoid.Property;
 import cxr.qoid.Qoid;
@@ -67,8 +69,16 @@ public class QoidTest {
 		System.out.println(b2.toString());
 	}
 	
-	public static void main(String[] args) {
-		parse_test();
+	public static void bill_open_test() throws IOException {
+		String dir = System.getProperty("user.dir");
+		System.out.println(dir);
+		Bill b = Bill.open("test", dir + "/test.cxr");
+		
+		System.out.println(b.toString());
+	}
+	
+	public static void main(String[] args) throws IOException {
+		bill_open_test();
 	}
 	
 }

@@ -1,0 +1,9 @@
+#Qoid tag 1
+property tag: property value
+
+#Qoid tag 2
+property tag2: property value
+property tag3: property value2
+
+#Qoid tag 3
+property tag3: property value3

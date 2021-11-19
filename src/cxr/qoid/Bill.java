@@ -1,5 +1,9 @@
 package cxr.qoid;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import cxr.qoid.base.Index;
@@ -87,6 +91,19 @@ public class Bill extends Index<Qoid>{
 		}
 		
 		return output;
+	}
+	
+	public static Bill open(String tag, String filepath) throws IOException {
+		BufferedReader br = new BufferedReader(new FileReader(filepath));
+		
+		ArrayList<String> text = new ArrayList<String>();
+		String line;
+		while ((line = br.readLine()) != null) {
+			text.add(line);
+		}
+		br.close();
+		
+		return Bill.parse(tag, String.join("\n", text));
 	}
 
 }
