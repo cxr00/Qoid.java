@@ -1,8 +1,10 @@
 package cxr.qoid;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -99,6 +101,7 @@ public class Bill extends Index<Qoid>{
 		}
 		File file = new File(filepath);
 		String tag = file.getName();
+		tag = tag.substring(0, tag.length() - 4);
 		
 		BufferedReader br = new BufferedReader(new FileReader(filepath));
 		
@@ -110,6 +113,17 @@ public class Bill extends Index<Qoid>{
 		br.close();
 		
 		return Bill.parse(tag, String.join("\n", text));
+	}
+	
+	public void save(String filepath) throws IOException {
+		if (!filepath.endsWith(".cxr")) {
+			throw new IOException("Invalid file type: " + filepath + " is not of type .cxr");
+		}
+		
+		BufferedWriter bw = new BufferedWriter(new FileWriter(filepath));
+		
+		bw.write(this.toString());
+		bw.close();
 	}
 
 }

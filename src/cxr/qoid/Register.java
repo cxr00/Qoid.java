@@ -59,4 +59,27 @@ public class Register extends Index<Index<?>>{
 		return output;
 	}
 	
+	public void save(String filepath) throws IOException {
+		if (!filepath.endsWith(".cxr")) {
+			throw new IOException("Invalid file type: " + filepath + " does not end with .cxr");
+		}
+		File file = new File(filepath);
+		if (!file.exists()){
+			file.mkdir();
+		}
+		if (file.isFile()){
+			throw new IOException("File already exists: directory " + filepath + " can not be constructed");
+		}
+		
+		for(Index<?> i : this) {
+			String subfilepath = filepath + "/" + i.tag() + ".cxr";
+			if (i instanceof Bill){
+				((Bill) i).save(subfilepath);
+			}
+			else {
+				((Register) i).save(subfilepath);
+			}
+		}
+	}
+	
 }

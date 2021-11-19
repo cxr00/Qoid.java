@@ -83,8 +83,17 @@ public class QoidTest {
 		System.out.println(r.toString());
 	}
 	
+	public static void register_open_and_save_test() throws IOException {
+		String dir = System.getProperty("user.dir");
+		Register r = Register.open(dir + "/example.cxr");
+		
+		System.out.println(r.toString());
+		
+		r.save(dir + "/example2.cxr");
+	}
+	
 	public static void main(String[] args) throws IOException {
-		register_open_test();
+		register_open_and_save_test();
 	}
 	
 }
