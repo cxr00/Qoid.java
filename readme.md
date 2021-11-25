@@ -79,6 +79,8 @@ Property p = q.get("tag2");
 p.setVal("new val1");
 ```
 
+In general, if you have a specific Property that you plan to modify frequently, it should be grabbed in this way.
+
 The traversal can be chained together like so:
 
 ```java
@@ -88,6 +90,6 @@ Register r = Register.open("example.cxr");
 r.getRegister("nestedregister").getBill("nestedbill").get("Qoid1").get("tag2").setVal("new val1");
 ```
 
-In general, if you have a specific Property that you plan to modify frequently, it should be grabbed in this way. Modifying the grabbed Property will directly modify the Bill it's in, no matter how many time it's changed (as long as it's only changed with `setTag()` and `setVal()`).
+Modifying the grabbed Property will directly modify the Bill it's in, no matter how many time it's changed (as long as it's only changed with `setTag()` and `setVal()`).
 
 
