@@ -38,6 +38,15 @@ public class Bill extends Index<Qoid>{
 		return output;
 	}
 	
+	public void broadcastVariable(String var, String value) {
+		for (Qoid q : this) {
+			for (Property p : q) {
+				p.setTag(p.tag().replace("@" + var + "@", value));
+				p.setVal(p.val().replace("@" + var + "@", value));
+			}
+		}
+	}
+	
 	public static Bill parse(String tag, String text) {
 		Bill output = new Bill(tag);
 		

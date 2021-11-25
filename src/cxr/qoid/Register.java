@@ -55,6 +55,17 @@ public class Register extends Index<Index<?>>{
 		}
 		return output;
 	}
+	
+	public void broadcastVariable(String var, String value) {
+		for (Index<?> i : this) {
+			if (i instanceof Register) {
+				((Register) i).broadcastVariable(var, value);
+			}
+			else {
+				((Bill) i).broadcastVariable(var, value);
+			}
+		}
+	}
 
 	public static Register open(String filepath) throws IOException {
 

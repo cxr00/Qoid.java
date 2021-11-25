@@ -122,8 +122,18 @@ public class QoidTest {
 		System.out.println(r.toString());
 	}
 	
+	public static void variable_test() throws IOException {
+		Register r = Register.open("example.cxr");
+		
+		r.getBill("examplebill").get(0).add(new Property("@var1@ tag", "Replace the variable declaration with the string \"@var1@\""));
+		
+		r.broadcastVariable("var1", "~*CXR*~");
+		
+		System.out.println(r.toString());
+	}
+	
 	public static void main(String[] args) throws IOException {
-		set_test();
+		variable_test();
 	}
 	
 }
