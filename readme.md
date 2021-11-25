@@ -33,6 +33,7 @@ tag2: val2
 ```
 
 Or, if you have a file written in Qoid markup with the `.cxr` extension, it can be quickly accessed:
+
 ```java
 Bill b = Bill.open("/path/to/file.cxr");
 ```
@@ -68,10 +69,10 @@ Register r2 = r.getRegister("nestedregister");
 // Get the Bill from example.cxr/nestedregister.cxr
 Bill b = r2.getBill("nestedbill");
 
-// Get the Qoid in b
+// Get the Qoid in nestedbill.cxr
 Qoid q = b.get("Qoid1");
 
-// Get the specific Property in q
+// Get the specific Property of Qoid1
 Property p = q.get("tag2");
 
 // Set the Property's val to a new String
@@ -87,6 +88,6 @@ Register r = Register.open("example.cxr");
 r.getRegister("nestedregister").getBill("nestedbill").get("Qoid1").get("tag2").setVal("new val1");
 ```
 
-In general, if you have a specific property that you plan to modify frequently, it should be grabbed in this way. Modifying the grabbed Property will directly modify the Bill it's in, no matter how many time it's changed (as long as it's only changed with `setTag()` and `setVal()`).
+In general, if you have a specific Property that you plan to modify frequently, it should be grabbed in this way. Modifying the grabbed Property will directly modify the Bill it's in, no matter how many time it's changed (as long as it's only changed with `setTag()` and `setVal()`).
 
 
