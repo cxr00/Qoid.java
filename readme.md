@@ -92,4 +92,30 @@ r.getRegister("nestedregister").getBill("nestedbill").get("Qoid1").get("tag2").s
 
 Modifying the grabbed Property will directly modify the Bill it's in, no matter how many time it's changed (as long as it's only changed with `setTag()` and `setVal()`).
 
+### Variable support
+
+Qoid has basic variable support. First, reference a variable by surrounding the variable name with `@` signs.
+
+```java
+Bill b = new Bill("example");
+Qoid q = new Qoid("Qoid0");
+
+q.add(new Property("tag", "has a value of @var@");
+```
+
+Then you can "broadcast" a value for the variable using the `broadcastVariable` function:
+
+```java
+b.broadcastVariable("var", "broadcasted value");
+
+System.out.println(b.toString());
+```
+```
+/ example
+
+#Qoid0
+tag: has a value of broadcasted value
+```
+
+The `broadcastVariable` function works on Registers as well.
 
