@@ -2,6 +2,10 @@ package cxr.qoid;
 
 import cxr.qoid.base.Qoid;
 
+/**
+ * A Property is a base Qoid with a String value.
+ * Properties are the building block of Qoid.
+ */
 public class Property extends Qoid<String>{
 
 	public Property(String tag) { super(tag); }

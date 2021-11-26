@@ -4,15 +4,13 @@ import java.util.ArrayList;
 
 import cxr.qoid.base.Index;
 
+/**
+ * A Qoid is an Index of Properties. Not much else to say about it.
+ */
 public class Qoid extends Index<Property>{
 
-	public Qoid(String tag) {
-		super(tag);
-	}
-	
-	public Qoid(String tag, ArrayList<Property> val) {
-		super(tag, val);
-	}
+	public Qoid(String tag) { super(tag); }
+	public Qoid(String tag, ArrayList<Property> val) { super(tag, val); }
 	
 	public String toString() {
 		String output = "#" + tag;

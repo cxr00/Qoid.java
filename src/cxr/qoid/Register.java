@@ -6,6 +6,13 @@ import java.util.ArrayList;
 
 import cxr.qoid.base.Index;
 
+/**
+ * A Register contains both Bills and Registers.
+ * 
+ * The structure of Registers is virtually identical to the
+ * structure of a file system, with the added benefit
+ * of tagged elements within each file.
+ */
 public class Register extends Index<Index<?>>{
 
 	public Register(String tag) {
@@ -14,6 +21,18 @@ public class Register extends Index<Index<?>>{
 	
 	public Register(String tag, ArrayList<Index<?>> val) {
 		super(tag, val);
+	}
+	
+	@Override
+	public boolean add(Index<?> i) {
+		// Make sure only Bills and Registers are added
+		if (i instanceof Bill || i instanceof Register) {
+			return super.add(i);
+		}
+		else {
+			// Fail on other types
+			return false;
+		}
 	}
 
 	public String toString() {
@@ -87,6 +106,7 @@ public class Register extends Index<Index<?>>{
 		String[] contents = directory.list();
 		
 		for(String filename : contents) {
+			// We only want valid cxr files
 			if (filename.endsWith(".cxr")){
 				String subfilepath = filepath + "/" + filename;
 				File subfile = new File(subfilepath);

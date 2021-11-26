@@ -6,6 +6,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
+/**
+ * An Index is a Qoid whose value is an ArrayList of some type.
+ * All overridden methods from List are done on val instead.
+ * 
+ * @param <V> the type of the Index's ArrayList
+ */
 public class Index<V extends Qoid<?>> extends Qoid<ArrayList<V>> implements List<V> {
 
 	public Index(String tag) {

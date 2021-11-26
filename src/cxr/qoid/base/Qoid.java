@@ -1,6 +1,12 @@
 package cxr.qoid.base;
 
 
+/**
+ * The base Qoid is a tag-value pair. The tag is always
+ * a String, but the value may be of any type
+ * 
+ * @param <V> the type of the Qoid's val
+ */
 public class Qoid<V> implements Comparable<Qoid<?>>{
 	
 	protected String tag;

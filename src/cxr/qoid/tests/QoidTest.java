@@ -132,8 +132,16 @@ public class QoidTest {
 		System.out.println(r.toString());
 	}
 	
+	public static void parse_edge_case_test() throws IOException {
+		Bill b = Bill.open("test.cxr");
+		
+		b.get(0).add(new Property("test tag", "test: val"));
+		
+		System.out.println(Bill.parse(b.tag(), b.toString()));
+	}
+	
 	public static void main(String[] args) throws IOException {
-		variable_test();
+		parse_edge_case_test();
 	}
 	
 }
