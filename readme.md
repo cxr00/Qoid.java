@@ -4,6 +4,34 @@ Qoid is a simple markup language which uses tag-value pairs to record data in tr
 
 All objects in Qoid have string tags, with values which add recursive depth. Start with a Property, which is a tag-value pair. Then a Qoid tags a list of Properties, a Bill tags a list of Qoids, and a Register tags a list of Bills and Registers. An object in Qoid.java can be created very quickly, then viewed or saved in its Qoid representation.
 
+### Writing in Qoid markup
+
+Qoid markup is relatively minimal. Take a look at the syntax below:
+
+```
+#QoidTag
+Property tag: Property value
+/ This is a comment
+tag2: val2
+
+#QoidTag2
+tag2: val2
+/ A Qoid may contain duplicate Property tags
+tag2: val3
+
+/ Duplicate Qoid tags are okay too
+#QoidTag2
+tag3: val4
+
+/ Most other stuff is simply ignored
+QoidTag3#
+asdf
+
+t: v
+```
+
+The file containing this markup is called a Bill.
+
 ### Some basics
 
 We can quickly build Bills in Java:
@@ -38,7 +66,7 @@ Or, if you have a file written in Qoid markup with the `.cxr` extension, it can 
 Bill b = Bill.open("/path/to/file.cxr");
 ```
 
-The tag of b will be assigned automatically based on the file name, so it would be `file` in this example. This can easily be changed with `b.setTag("new tag")`.
+Note that the file name must end with `.cxr` or it will throw an exception. The tag of `b` will be assigned automatically based on the file name, so it would be `file` in this example. This can easily be changed with `b.setTag("new tag")`.
 
 We can also construct folders of Qoid objects, called Registers. A Register can contain both Bills and other Registers. Any folder ending with `.cxr` can be opened just like a Bill:
 
