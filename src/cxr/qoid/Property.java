@@ -21,5 +21,11 @@ public class Property extends Qoid<String>{
 	}
 	
 	public String val() { return val != null ? val : ""; }
+	
+	public Property broadcastVariable(String var, String value) {
+		String new_tag = this.tag().replace("@" + var + "@", value);
+		String new_val = this.val().replace("@" + var + "@", value);
+		return new Property(new_tag, new_val);
+	}
 
 }

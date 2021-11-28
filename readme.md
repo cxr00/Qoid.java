@@ -68,13 +68,19 @@ Bill b = Bill.open("/path/to/file.cxr");
 
 Note that the file name must end with `.cxr` or it will throw an exception. The tag of `b` will be assigned automatically based on the file name, so it would be `file` in this example. This can easily be changed with `b.setTag("new tag")`.
 
+An additional parameter may be specified, called `preserveComments`, which determines whether or not comments are preserved in the Bill object. By default, comments are included. But if you want Qoid to ignore comments when loading a file, add the `false` flag:
+
+```java
+Bill b = Bill.open("/path/to/file.cxr", false);
+```
+
 We can also construct folders of Qoid objects, called Registers. A Register can contain both Bills and other Registers. Any folder ending with `.cxr` can be opened just like a Bill:
 
 ```java
-Register r = Register.open("/path/to/folder.cxr");
+Register r = Register.open("/path/to/folder.cxr", false);
 ```
 
-To save either a Bill or Register, use the `.save(filepath)` method:
+Again with optional parameter `preserveComments`. To save either a Bill or Register, use the `.save(filepath)` method:
 
 ```java
 Bill b = Bill.open("/path/to/file.cxr");

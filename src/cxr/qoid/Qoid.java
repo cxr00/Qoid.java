@@ -37,4 +37,12 @@ public class Qoid extends Index<Property>{
 		}
 		return output;
 	}
+	
+	public Qoid broadcastVariable(String var, String value) {
+		Qoid output = new Qoid(this.tag());
+		for (Property p : this) {
+			output.add(p.broadcastVariable(var, value));
+		}
+		return output;
+	}
 }

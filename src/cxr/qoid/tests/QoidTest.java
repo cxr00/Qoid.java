@@ -127,9 +127,11 @@ public class QoidTest {
 		
 		r.getBill("examplebill").get(0).add(new Property("@var1@ tag", "Replace the variable declaration with the string \"@var1@\""));
 		
-		r.broadcastVariable("var1", "~*CXR*~");
+		Register r2 = r.broadcastVariable("var1", "~*CXR*~");
 		
 		System.out.println(r.toString());
+		System.out.println();
+		System.out.println(r2.toString());
 	}
 	
 	public static void parse_edge_case_test() throws IOException {
@@ -141,13 +143,13 @@ public class QoidTest {
 	}
 	
 	public static void bill_with_comments() throws IOException {
-		Bill b = Bill.open("test.cxr", false);
+		Bill b = Bill.open("test.cxr", true);
 		
 		System.out.println(b.toString());
 	}
 	
 	public static void main(String[] args) throws IOException {
-		bill_with_comments();
+		variable_test();
 	}
 	
 }

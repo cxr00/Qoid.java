@@ -30,5 +30,4 @@ public class Qoid<V> implements Comparable<Qoid<?>>{
 
 	@Override
 	public int compareTo(Qoid<?> o) { return -o.tag().compareTo(this.tag()); }
-	
 }

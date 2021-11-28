@@ -14,6 +14,8 @@ import cxr.qoid.base.Index;
  * of tagged elements within each file.
  */
 public class Register extends Index<Index<?>>{
+	
+	private static boolean DEFAULT_PRESERVE_COMMENTS = true;
 
 	public Register(String tag) {
 		super(tag);
@@ -75,18 +77,24 @@ public class Register extends Index<Index<?>>{
 		return output;
 	}
 	
-	public void broadcastVariable(String var, String value) {
+	public Register broadcastVariable(String var, String value) {
+		Register output = new Register(this.tag());
 		for (Index<?> i : this) {
 			if (i instanceof Register) {
-				((Register) i).broadcastVariable(var, value);
+				output.add(((Register) i).broadcastVariable(var, value));
 			}
 			else {
-				((Bill) i).broadcastVariable(var, value);
+				output.add(((Bill) i).broadcastVariable(var, value));
 			}
 		}
+		return output;
+	}
+	
+	public static Register open(String filepath) throws IOException {
+		return Register.open(filepath, DEFAULT_PRESERVE_COMMENTS);
 	}
 
-	public static Register open(String filepath) throws IOException {
+	public static Register open(String filepath, boolean preserveComments) throws IOException {
 
 		File directory = new File(filepath);
 		
@@ -111,10 +119,10 @@ public class Register extends Index<Index<?>>{
 				String subfilepath = filepath + "/" + filename;
 				File subfile = new File(subfilepath);
 				if (subfile.isDirectory()) {
-					output.add(Register.open(subfilepath));
+					output.add(Register.open(subfilepath, preserveComments));
 				}
 				else {
-					output.add(Bill.open(subfilepath));
+					output.add(Bill.open(subfilepath, preserveComments));
 				}
 			}
 		}

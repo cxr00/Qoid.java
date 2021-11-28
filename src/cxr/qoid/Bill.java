@@ -43,13 +43,12 @@ public class Bill extends Index<Qoid>{
 		return output;
 	}
 	
-	public void broadcastVariable(String var, String value) {
+	public Bill broadcastVariable(String var, String value) {
+		Bill output = new Bill(this.tag());
 		for (Qoid q : this) {
-			for (Property p : q) {
-				p.setTag(p.tag().replace("@" + var + "@", value));
-				p.setVal(p.val().replace("@" + var + "@", value));
-			}
+			output.add(q.broadcastVariable(var, value));
 		}
+		return output;
 	}
 	
 	public static Bill parse(String tag, String text) { return Bill.parse(tag, text.split("\n")); }
