@@ -140,8 +140,14 @@ public class QoidTest {
 		System.out.println(Bill.parse(b.tag(), b.toString()));
 	}
 	
+	public static void bill_with_comments() throws IOException {
+		Bill b = Bill.open("test.cxr", false);
+		
+		System.out.println(b.toString());
+	}
+	
 	public static void main(String[] args) throws IOException {
-		parse_edge_case_test();
+		bill_with_comments();
 	}
 	
 }

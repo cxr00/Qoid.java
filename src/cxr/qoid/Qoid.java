@@ -13,7 +13,15 @@ public class Qoid extends Index<Property>{
 	public Qoid(String tag, ArrayList<Property> val) { super(tag, val); }
 	
 	public String toString() {
-		String output = "#" + tag;
+		String output;
+		// Check if the Qoid is a comment
+		if(this.tag().startsWith("/")) {
+			output = tag;
+		}
+		else {
+			output = "#" + tag;
+		}
+		
 		for (Property p : this) {
 			output += "\n" + p.toString();
 		}

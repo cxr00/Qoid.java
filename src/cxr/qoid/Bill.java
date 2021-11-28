@@ -19,6 +19,8 @@ import cxr.qoid.base.Index;
  * Bills also have basic variable support with the broadcastVariable function.
  */
 public class Bill extends Index<Qoid>{
+	
+	private static boolean DEFAULT_PRESERVE_COMMENTS = true;
 
 	public Bill(String tag) { super(tag); }
 	public Bill(String tag, ArrayList<Qoid> val) { super(tag, val); }
@@ -52,8 +54,12 @@ public class Bill extends Index<Qoid>{
 	
 	public static Bill parse(String tag, String text) { return Bill.parse(tag, text.split("\n")); }
 	public static Bill parse(String tag, ArrayList<String> text) { return Bill.parse(tag,  text.toArray(new String[0])); }
+	public static Bill parse(String tag, String[] text) { return Bill.parse(tag, text, DEFAULT_PRESERVE_COMMENTS); }
 	
-	public static Bill parse(String tag, String[] text) {
+	public static Bill parse(String tag, String text, boolean preserveComments) { return Bill.parse(tag, text.split("\n"), preserveComments); }
+	public static Bill parse(String tag, ArrayList<String> text, boolean preserveComments) { return Bill.parse(tag,  text.toArray(new String[0]), preserveComments); }
+	
+	public static Bill parse(String tag, String[] text, boolean preserveComments) {
 		Bill output = new Bill(tag);
 		
 		Qoid spool = null;
@@ -73,6 +79,11 @@ public class Bill extends Index<Qoid>{
 					spool_added = false;
 					state = 1;
 				}
+				else if(s.charAt(0) == '/') {
+					if (preserveComments) {
+						output.add(new Qoid(s));
+					}
+				}
 			}
 			// Building state
 			else {
@@ -84,8 +95,11 @@ public class Bill extends Index<Qoid>{
 					}
 					state = 0;
 				}
-				// Skip comments, but stay with the current Qoid
+				// Stores comments and stays with the current Qoid
 				else if (s.charAt(0) == '/') {
+					if (preserveComments) {
+						spool.add(new Property(s));
+					}
 					continue;
 				}
 				// Scrape and add the property
@@ -111,6 +125,10 @@ public class Bill extends Index<Qoid>{
 	}
 	
 	public static Bill open(String filepath) throws IOException {
+		return Bill.open(filepath, DEFAULT_PRESERVE_COMMENTS);
+	}
+	
+	public static Bill open(String filepath, boolean preserveComments) throws IOException {
 		if (!filepath.endsWith(".cxr")) {
 			throw new IOException("Invalid file type: " + filepath + " is not of type .cxr");
 		}
@@ -127,7 +145,7 @@ public class Bill extends Index<Qoid>{
 		}
 		br.close();
 		
-		return Bill.parse(tag, text);
+		return Bill.parse(tag, text, preserveComments);
 	}
 	
 	public void save(String filepath) throws IOException {

@@ -1,8 +1,11 @@
 #Qoid tag 1
 property tag: property value
 
+/ An outer comment
+
 #Qoid tag 2
 property tag2: property value
+/ An inner comment
 property tag3: property value2
 
 #Qoid tag 3
