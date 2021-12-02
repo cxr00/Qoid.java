@@ -140,7 +140,7 @@ q.add(new Property("tag", "has a value of @var@");
 Then you can "broadcast" a value for the variable using the `broadcastVariable` function:
 
 ```java
-b.broadcastVariable("var", "broadcasted value");
+b = b.broadcastVariable("var", "broadcasted value");
 
 System.out.println(b.toString());
 ```
