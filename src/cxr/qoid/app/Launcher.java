@@ -184,7 +184,7 @@ public class Launcher extends JPanel implements ActionListener {
 		app.setFocusable(true);
 		app.setSize(Sys.resolution().width, Sys.resolution().height - 50);
 		app.setVisible(true);
-		app.setTitle("Qoid v1.0.2.0 by Conrad Complexor");
+		app.setTitle("Qoid v1.0.2.0 by Complexor");
 	}
 
 	private int chooseFile() {
